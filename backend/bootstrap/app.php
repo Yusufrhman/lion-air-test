@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias([
+            'administrator' => \App\Http\Middleware\EnsureAdministrator::class,
+        ]);
         $middleware->redirectGuestsTo(function ($request) {
             if ($request->is('api/*')) {
                 return null;
