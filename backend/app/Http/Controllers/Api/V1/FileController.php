@@ -21,12 +21,42 @@ class FileController extends Controller
         // Minimum 1, maximum 100
         $perPage = min(max($perPage, 1), 100);
 
-        $files = File::query()
+        $query = File::query()
             ->with([
                 'department:id,name',
                 'folder:id,name',
                 'uploader:id,email',
-            ])
+            ]);
+
+        /*
+        Search by file name or title
+        */
+
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+
+            $query->where(function ($query) use ($search) {
+                $query->where('file_name', 'like', "%{$search}%")
+                    ->orWhere('title', 'like', "%{$search}%");
+            });
+        }
+
+        /*
+        Filter by department
+        */
+
+        if ($request->filled('departmentId')) {
+            $query->where(
+                'department_id',
+                $request->integer('departmentId')
+            );
+        }
+
+        /*
+        Paginate files
+        */
+
+        $files = $query
             ->latest()
             ->paginate($perPage);
 
