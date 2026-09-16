@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -32,6 +33,20 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function isAdministrator(): bool
+    {
+        return $this->role === 'administrator';
+    }
+
+    public function isViewer(): bool
+    {
+        return $this->role === 'viewer';
+    }
+
+    public function uploadedFiles()
+    {
+        return $this->hasMany(File::class, 'uploaded_by');
+    }
 
     /**
      * Get the attributes that should be cast.
