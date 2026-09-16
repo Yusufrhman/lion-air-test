@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\DepartmentController;
+use App\Http\Controllers\Api\V1\FileController;
 use App\Http\Controllers\Api\V1\FolderController;
 
 Route::prefix('v1')->group(function () {
@@ -75,6 +76,38 @@ Route::prefix('v1')->group(function () {
 
             Route::delete('/departments/{id}', [DepartmentController::class, 'destroy']);
 
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | File Routes
+        |--------------------------------------------------------------------------
+        */
+
+        // Administrator + Viewer
+        Route::get('/files', [FileController::class, 'index']);
+
+        Route::get('/files/{id}', [FileController::class, 'show']);
+
+        Route::get(
+            '/files/{id}/download',
+            [FileController::class, 'download']
+        );
+
+
+        // Administrator Only
+        Route::middleware('administrator')->group(function () {
+            Route::post('/files', [FileController::class, 'store']);
+
+            Route::patch(
+                '/files/{id}',
+                [FileController::class, 'update']
+            );
+
+            Route::delete(
+                '/files/{id}',
+                [FileController::class, 'destroy']
+            );
         });
 
     });
