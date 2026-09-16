@@ -7,6 +7,7 @@ use App\Models\File;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 class FileController extends Controller
@@ -141,7 +142,7 @@ class FileController extends Controller
             return response()->json([
                 'message' => 'File uploaded successfully.',
                 'data' => $this->transformFile($file),
-            ], 201);
+            ], Response::HTTP_CREATED);
         } catch (Throwable $exception) {
             /*
             Rollback physical file
@@ -269,7 +270,7 @@ class FileController extends Controller
         if (!Storage::exists($file->file_path)) {
             return response()->json([
                 'message' => 'Physical file not found.',
-            ], 404);
+            ], Response::HTTP_NOT_FOUND);
         }
 
         return Storage::download(
