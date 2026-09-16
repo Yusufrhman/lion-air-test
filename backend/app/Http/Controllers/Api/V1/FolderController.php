@@ -7,6 +7,7 @@ use App\Models\Folder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
 
 class FolderController extends Controller
 {
@@ -57,7 +58,7 @@ class FolderController extends Controller
                 'name' => $folder->name,
                 'parentId' => $folder->parent_id,
             ],
-        ], 201);
+        ], Response::HTTP_CREATED);
     }
 
     /**
@@ -182,13 +183,13 @@ class FolderController extends Controller
         if ($folder->children_count > 0) {
             return response()->json([
                 'message' => 'Folder cannot be deleted because it contains child folders.',
-            ], 409);
+            ], Response::HTTP_CONFLICT);
         }
 
         if ($folder->files_count > 0) {
             return response()->json([
                 'message' => 'Folder cannot be deleted because it contains files.',
-            ], 409);
+            ], Response::HTTP_CONFLICT);
         }
 
         $folder->delete();
