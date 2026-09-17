@@ -63,7 +63,7 @@ class FileController extends Controller
 
         return response()->json([
             'data' => $files->getCollection()
-                ->map(fn(File $file) => $this->transformFile($file))
+                ->map(fn(File $file) => $file->toApiArray())
                 ->values(),
 
             'meta' => [
@@ -141,7 +141,7 @@ class FileController extends Controller
 
             return response()->json([
                 'message' => 'File uploaded successfully.',
-                'data' => $this->transformFile($file),
+                'data' => $file->toApiArray(),
             ], Response::HTTP_CREATED);
         } catch (Throwable $exception) {
             /*
@@ -167,7 +167,7 @@ class FileController extends Controller
         ]);
 
         return response()->json([
-            'data' => $this->transformFile($file),
+            'data' => $file->toApiArray(),
         ]);
     }
 
@@ -224,7 +224,7 @@ class FileController extends Controller
 
         return response()->json([
             'message' => 'File updated successfully.',
-            'data' => $this->transformFile($file),
+            'data' => $file->toApiArray(),
         ]);
     }
 
@@ -282,40 +282,4 @@ class FileController extends Controller
         );
     }
 
-    /**
-     * Transform File model into API response.
-     */
-    private function transformFile(File $file): array
-    {
-        return [
-            'id' => $file->id,
-
-            'fileName' => $file->file_name,
-
-            'title' => $file->title,
-
-            'department' => $file->department
-                ? [
-                    'id' => $file->department->id,
-                    'name' => $file->department->name,
-                ]
-                : null,
-
-            'folder' => $file->folder
-                ? [
-                    'id' => $file->folder->id,
-                    'name' => $file->folder->name,
-                ]
-                : null,
-
-            'uploadedBy' => $file->uploader
-                ? [
-                    'id' => $file->uploader->id,
-                    'email' => $file->uploader->email,
-                ]
-                : null,
-
-            'uploadedAt' => $file->created_at?->toISOString(),
-        ];
-    }
 }

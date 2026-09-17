@@ -16,16 +16,26 @@ class DashboardController extends Controller
     public function index(): JsonResponse
     {
         $latestFiles = File::query()
+            ->with([
+                'department:id,name',
+                'folder:id,name',
+                'uploader:id,email',
+            ])
             ->latest('created_at')
             ->limit(10)
             ->get();
 
         return response()->json([
             'data' => [
-                'latest_files' => $latestFiles,
-                'total_folders' => Folder::count(),
-                'total_files' => File::count(),
-                'total_departments' => Department::count(),
+                'latestFiles' => $latestFiles
+                    ->map(fn(File $file) => $file->toApiArray())
+                    ->values(),
+
+                'totalFolders' => Folder::count(),
+
+                'totalFiles' => File::count(),
+
+                'totalDepartments' => Department::count(),
             ],
         ]);
     }

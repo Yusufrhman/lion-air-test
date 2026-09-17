@@ -18,7 +18,8 @@ class DepartmentController extends Controller
     {
         $departments = Department::query()
             ->orderBy('name')
-            ->get();
+            ->get()
+            ->map(fn(Department $department) => $this->transformDepartment($department));
 
         return response()->json([
             'data' => $departments,
@@ -42,7 +43,7 @@ class DepartmentController extends Controller
 
         return response()->json([
             'message' => 'Department created successfully.',
-            'data' => $department,
+            'data' => $this->transformDepartment($department),
         ], Response::HTTP_CREATED);
     }
 
@@ -67,7 +68,7 @@ class DepartmentController extends Controller
 
         return response()->json([
             'message' => 'Department updated successfully.',
-            'data' => $department->fresh(),
+            'data' => $this->transformDepartment($department->fresh()),
         ]);
     }
 
@@ -87,5 +88,21 @@ class DepartmentController extends Controller
         return response()->json([
             'message' => 'Department deleted successfully.',
         ]);
+    }
+
+    /**
+     * Transform Department model into API response.
+     */
+    private function transformDepartment(Department $department): array
+    {
+        return [
+            'id' => $department->id,
+
+            'name' => $department->name,
+
+            'createdAt' => $department->created_at?->toISOString(),
+
+            'updatedAt' => $department->updated_at?->toISOString(),
+        ];
     }
 }
