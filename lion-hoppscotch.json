@@ -1,0 +1,646 @@
+{
+  "v": 10,
+  "id": "cmu43pwu61jsqel1ilg80jn2v",
+  "name": "lion",
+  "folders": [
+    {
+      "v": 10,
+      "id": "cmu45otw6232wdi1i48yhg18g",
+      "name": "auth",
+      "folders": [],
+      "requests": [
+        {
+          "v": "15",
+          "name": "login",
+          "method": "POST",
+          "endpoint": "<<BASE_URL>>/login",
+          "params": [],
+          "headers": [],
+          "preRequestScript": "",
+          "testScript": "export {};\nconst responseJson = pw.response.body;\n\nconsole.log(responseJson)\n\nif (pw.response.status == 200) {\n    pw.env.set(\"ACCESS_TOKEN\", responseJson.data.accessToken);\n}",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password\"\n}\n"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "logout",
+          "method": "POST",
+          "endpoint": "<<BASE_URL>>/logout",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "me",
+          "method": "GET",
+          "endpoint": "<<BASE_URL>>/me",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "export {};\n",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "variables": [],
+      "_ref_id": "coll_mu5l66yk_04eaa711-75da-486c-adc9-186c5c6ddd85"
+    },
+    {
+      "v": 10,
+      "id": "cmu45p3ej2333di1i7a6ju7w3",
+      "name": "folder",
+      "folders": [],
+      "requests": [
+        {
+          "v": "15",
+          "name": "folder hierarchy.",
+          "method": "GET",
+          "endpoint": "<<BASE_URL>>/folders",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "create folder",
+          "method": "POST",
+          "endpoint": "<<BASE_URL>>/folders",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n    \"name\": \"Archive\",\n    \"parentId\": null\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "folder by id",
+          "method": "GET",
+          "endpoint": "<<BASE_URL>>/folders/1023",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "folder by id",
+          "method": "PATCH",
+          "endpoint": "<<BASE_URL>>/folders/4",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"IT\",\n  \"parentId\": 8\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "folder by id",
+          "method": "DELETE",
+          "endpoint": "<<BASE_URL>>/folders/3",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "variables": [],
+      "_ref_id": "coll_mu5l66yl_4d0dcf35-556b-4aba-960b-18b10bc90935"
+    },
+    {
+      "v": 10,
+      "id": "cmu46ociv23vzdi1iewexgqzn",
+      "name": "department",
+      "folders": [],
+      "requests": [
+        {
+          "v": "15",
+          "name": "list departments",
+          "method": "GET",
+          "endpoint": "<<BASE_URL>>/departments",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "departments",
+          "method": "POST",
+          "endpoint": "<<BASE_URL>>/departments",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"IT\"\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "departments by id",
+          "method": "PATCH",
+          "endpoint": "<<BASE_URL>>/departments/4",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"name\": \"Tech & Data\"\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "departments by id",
+          "method": "DELETE",
+          "endpoint": "<<BASE_URL>>/departments/1",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "variables": [],
+      "_ref_id": "coll_mu5l66yl_a3a0eab4-5863-465a-81bb-a5a7000dc1b4"
+    },
+    {
+      "v": 10,
+      "id": "cmu48d3zm1kydel1ihwgqba5v",
+      "name": "file",
+      "folders": [],
+      "requests": [
+        {
+          "v": "15",
+          "name": "list files",
+          "method": "GET",
+          "endpoint": "<<BASE_URL>>/files",
+          "params": [
+            {
+              "key": "page",
+              "value": "1",
+              "active": true,
+              "description": ""
+            },
+            {
+              "key": "perPage",
+              "value": "10",
+              "active": true,
+              "description": ""
+            },
+            {
+              "key": "search",
+              "value": "File Management",
+              "active": true,
+              "description": ""
+            },
+            {
+              "key": "departmentId",
+              "value": "1",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "files",
+          "method": "POST",
+          "endpoint": "<<BASE_URL>>/files",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "multipart/form-data",
+            "body": [
+              {
+                "key": "file",
+                "active": true,
+                "isFile": false,
+                "value": ""
+              },
+              {
+                "key": "title",
+                "active": true,
+                "isFile": false,
+                "value": "test"
+              },
+              {
+                "key": "departmentId",
+                "active": true,
+                "isFile": false,
+                "value": "1"
+              },
+              {
+                "key": "folderId",
+                "active": true,
+                "isFile": false,
+                "value": "7"
+              }
+            ]
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "file by id",
+          "method": "GET",
+          "endpoint": "<<BASE_URL>>/files/1",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "file by id",
+          "method": "PATCH",
+          "endpoint": "<<BASE_URL>>/files/1",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": "application/json",
+            "body": "{\n  \"departmentId\": 1,\n  \"folderId\": 7,\n  \"title\": \"test lion2\"\n}"
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "file by id",
+          "method": "DELETE",
+          "endpoint": "<<BASE_URL>>/files/1",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        },
+        {
+          "v": "15",
+          "name": "download file",
+          "method": "GET",
+          "endpoint": "<<BASE_URL>>/files/2/download",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "variables": [],
+      "_ref_id": "coll_mu5l66yl_87f9a7d8-cd12-4708-a730-7e1a0974f336"
+    },
+    {
+      "v": 10,
+      "id": "cmu49hm2024g4di1i9x87kfpi",
+      "name": "dashboard",
+      "folders": [],
+      "requests": [
+        {
+          "v": "15",
+          "name": "dashboard",
+          "method": "GET",
+          "endpoint": "<<BASE_URL>>/dashboard",
+          "params": [],
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer <<ACCESS_TOKEN>>",
+              "active": true,
+              "description": ""
+            }
+          ],
+          "preRequestScript": "",
+          "testScript": "",
+          "auth": {
+            "authType": "inherit",
+            "authActive": true
+          },
+          "body": {
+            "contentType": null,
+            "body": null
+          },
+          "requestVariables": [],
+          "responses": {}
+        }
+      ],
+      "auth": {
+        "authType": "inherit",
+        "authActive": true
+      },
+      "headers": [],
+      "variables": [],
+      "_ref_id": "coll_mu5l66yl_85c94546-bdf7-4f72-a371-5e4800ff2510"
+    }
+  ],
+  "requests": [],
+  "auth": {
+    "authType": "inherit",
+    "authActive": true
+  },
+  "headers": [],
+  "variables": [],
+  "_ref_id": "coll_mu5l66yl_6b07a636-5236-4bb8-8001-2f88edbf0ff4"
+}
