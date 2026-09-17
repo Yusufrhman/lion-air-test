@@ -1,1 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink-950: #16130e;
+  --color-ink-900: #211c15;
+  --color-ink-800: #2e271d;
+  --color-ink-700: #3c3327;
+  --color-ink-600: #4c4132;
+  --color-ink-500: #6a5c48;
+  --color-ink-400: #8c7c65;
+  --color-ink-300: #b3a48b;
+  --color-ink-200: #d6cbbc;
+  --color-ink-100: #ebe4d8;
+  --color-ink-50: #f6f2ea;
+
+  --color-paper: #faf7f0;
+  --color-paper-deep: #f1ebdf;
+
+  --color-brass-700: #7c520a;
+  --color-brass-600: #9a6710;
+  --color-brass-500: #bd8418;
+  --color-brass-400: #d9a53c;
+  --color-brass-300: #e6c176;
+  --color-brass-200: #f1dda8;
+  --color-brass-100: #f8eed2;
+  --color-brass-50: #fcf6e6;
+
+  --color-moss-600: #4a6e42;
+  --color-moss-500: #5d8753;
+  --color-moss-100: #e2ecdd;
+
+  --color-rust-700: #8f3a26;
+  --color-rust-600: #ad4a33;
+  --color-rust-500: #c26047;
+  --color-rust-100: #f6e3dc;
+
+  --shadow-plate: 3px 3px 0 0 var(--color-ink-900);
+  --shadow-plate-brass: 3px 3px 0 0 var(--color-brass-600);
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  @apply bg-paper text-ink-900 antialiased;
+  font-family: var(--font-mono);
+  background-image: radial-gradient(rgba(76, 65, 50, 0.055) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+::selection {
+  background: var(--color-brass-200);
+}
+
+.eyebrow {
+  @apply font-mono text-[10px] font-semibold uppercase tracking-[0.28em];
+}
+
+.rule-dashed {
+  background-image: linear-gradient(
+    to right,
+    var(--color-ink-300) 0,
+    var(--color-ink-300) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  background-size: 12px 1px;
+  background-repeat: repeat-x;
+  height: 1px;
+}
+
+.stamp {
+  @apply inline-flex items-center gap-1 border border-dashed border-current px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-[0.18em];
+}
+
+.tab-notch {
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+
+.fold-corner {
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+}
+
+.stripes-brass {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 26px,
+    rgba(217, 165, 60, 0.14) 26px 34px
+  );
+}
+
+input[type="file"]::file-selector-button {
+  @apply mr-3 cursor-pointer border border-ink-900 bg-brass-400 px-3 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-ink-950 transition-colors hover:bg-brass-300;
+}
