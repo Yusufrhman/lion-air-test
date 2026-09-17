@@ -32,4 +32,41 @@ class File extends Model
     {
         return $this->belongsTo(User::class, 'uploaded_by');
     }
+
+    /**
+     * Transform into the canonical API response shape (FileDTO).
+     */
+    public function toApiArray(): array
+    {
+        return [
+            'id' => $this->id,
+
+            'fileName' => $this->file_name,
+
+            'title' => $this->title,
+
+            'department' => $this->department
+                ? [
+                    'id' => $this->department->id,
+                    'name' => $this->department->name,
+                ]
+                : null,
+
+            'folder' => $this->folder
+                ? [
+                    'id' => $this->folder->id,
+                    'name' => $this->folder->name,
+                ]
+                : null,
+
+            'uploadedBy' => $this->uploader
+                ? [
+                    'id' => $this->uploader->id,
+                    'email' => $this->uploader->email,
+                ]
+                : null,
+
+            'uploadedAt' => $this->created_at?->toISOString(),
+        ];
+    }
 }
