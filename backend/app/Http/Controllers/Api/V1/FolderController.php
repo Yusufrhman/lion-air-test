@@ -94,7 +94,7 @@ class FolderController extends Controller
                 'files' => $folder->files->map(function ($file) {
                     return [
                         'id' => $file->id,
-                        'name' => $file->name,
+                        'name' => $file->title,
                     ];
                 })->values(),
             ],
@@ -220,7 +220,7 @@ class FolderController extends Controller
                 'files' => $folder->files->map(function ($file) {
                     return [
                         'id' => $file->id,
-                        'name' => $file->name,
+                        'name' => $file->title,
                     ];
                 })->values()->all(),
             ];
