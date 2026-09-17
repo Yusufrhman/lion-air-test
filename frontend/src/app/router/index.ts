@@ -22,7 +22,7 @@ const router = createRouter({
           path: "dashboard",
           name: "dashboard",
           component: () => import("@/features/dashboard/pages/dashboard-page.vue"),
-          meta: { requiresAdmin: true, section: "overview" },
+          meta: { requiresAdmin: true, section: "dashboard" },
         },
         {
           path: "folders",
